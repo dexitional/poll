@@ -34,7 +34,7 @@ function authenticate() {
 /* Entry or Index Page */
 $app->get('/', 'authenticate',function () use ($app) {
    if(isset($_SESSION['user'])){
-      if($_SESSION['user'] && $_SESSION['user']['role_id'] == '5'){
+      if(isset($_SESSION['user']) && $_SESSION['user']['role_id'] == '5'){
          $app->render($app->urlFor('dashagent')); # Auth Login
       }else{
          $app->render($app->urlFor('dashadmin')); # Auth Login
