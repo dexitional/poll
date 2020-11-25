@@ -22,7 +22,7 @@ function fetch($url){
 
 // Authentication Checker
 function authenticate() {
-   $_SESSION['user'] = ['name'=> 'Kobby','id'=> '1'];
+   $_SESSION['user'] = ['name'=> 'Kobby','id'=> '1','role_id'=> 5];
    if (!isset($_SESSION['user']) || $_SESSION['user'] == null) {
       $app = \Slim\Slim::getInstance();
       $app->flash('error', 'Login required');
