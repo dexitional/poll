@@ -1,4 +1,4 @@
-<?php ?>
+<?php if(!isset($_SESSION)) session_start(); ?>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow bg-danger header-text-light">
             <div class="app-header__logo">
@@ -295,7 +295,9 @@
                     bg-slick-carbon sidebar-text-light
                     
                 -->
-                
+                <?php 
+                    //var_dump($app->urlFor('agent',['cid'=>$_SESSION['user']['constituency_id'],'eid'=>$_SESSION['user']['election_id']]));
+                ?>
                 
                 <div class="scrollbar-sidebar bg-light sidebar-text-dark active">
                     <div class="app-sidebar__inner">
@@ -303,26 +305,30 @@
                             <img src="./public/images/ndc_logo.png" class="img-fluid" height="80px" >
                         </div>
                         <ul class="vertical-nav-menu">
-                            
+                            <?php if($_SESSION['user']['role_id'] != 5){ ?>
                             <li class="app-sidebar__heading">CONSITUENCY ADMINISTRATOR</li>
-                            <li><a href="../controllers/Elections?polling_sheet=1" class="mm-active">ELECTION DASHBOARD</a></li>
-
+                            <li><a href="<?= $app->urlFor('index'); ?>" class="<?= $slug == 'dashadmin'?'mm-active':''?>">ADMIN DASHBOARD</a></li>
+                            <?php } if($_SESSION['user']['role_id'] == 5){ ?>
                             <li class="app-sidebar__heading">POLLING AGENT DASHBOARD</li>
-                            <li><a href="../controllers/Elections?polling_sheet=1" class="mm-active">ELECTION DASHBOARD</a></li>
-
-                            <li class="app-sidebar__heading">ELECTION COALITION CENTER</li>
+                            <li><a href="<?= $app->urlFor('index'); ?>" class="<?= $slug == 'dashagent'?'mm-active':''?>">AGENT DASHBOARD</a></li>
+                            <?php } if($_SESSION['user']['role_id'] != 5){ ?>
+                           <!-- <li class="app-sidebar__heading">ELECTION COALITION CENTER</li>
                             <li><a href="../controllers/Elections?polling_sheet=1" class="">NATIONAL STATS</a></li>
                             <li><a href="../controllers/Elections?polling_sheet=1" class="">REGIONAL STATS</a></li>
                             <li><a href="../controllers/Elections?polling_sheet=1" class="">CONSTITUENCY STATS</a></li>
-
+                            -->
+                            <?php } ?>
+                            <?php if($_SESSION['user']['role_id'] == 4 || $_SESSION['user']['role_id'] == 1){ ?>
                             <li class="app-sidebar__heading">ADMIN SETTINGS</li>
-                            <li><a href="../controllers/Elections?polling_sheet=1" class="">USERS & ACCOUNTS</a></li>
-                            <li><a href="../controllers/Elections?polling_sheet=1" class="">CONSTITUENCIES</a></li>
-                            <li><a href="../controllers/Elections?polling_sheet=1" class="">DISTRICTS</a></li>
+                            <li><a href="<?= $app->urlFor('user'); ?>" class="<?= $slug == 'user'?'mm-active':''?>">USERS & ACCOUNTS</a></li>
+                            <?php } if($_SESSION['user']['role_id'] == 1){ ?>
+                            <li><a href="<?= $app->urlFor('const'); ?>" class="<?= $slug == 'const'?'mm-active':''?>">CONSTITUENCIES</a></li>
+                            <li><a href="<?= $app->urlFor('district'); ?>" class="<?= $slug == 'district'?'mm-active':''?>">DISTRICTS</a></li>
+                            <?php } ?>
                             <li>
-                                <a href="tables-regular.html">
+                                <a href="<?= $app->urlFor('logout'); ?>" onclick="return confirm('Logout of session ?')">
                                     <i class="metismenu-icon pe-7s-display2"></i>
-                                    Logout
+                                    LOGOUT
                                 </a>
                             </li>
                             

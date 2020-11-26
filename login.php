@@ -11,7 +11,7 @@
 
 <body class="login-body">
     <div class="login-cover">
-        <form method="post" action="controllers/Auth" class="login-form">
+        <form method="post" action="postlogin" class="login-form">
             <img class="login-logo" src="./public/images/ndc_logo.png"/>
             <h2 class="title">NDC LOGIN</h2>
             <div class="form-group">
@@ -25,7 +25,7 @@
             </div>
             
             <div class="form-group">
-                <input type="submit" name="Login" class="btn btn-danger form-control login-btn" value="SIGN IN">
+                <input type="submit" class="btn btn-danger form-control login-btn" value="SIGN IN">
             </div>
 
             <small class="adamu">&copy; <?= date('Y'); ?>, All rights reserved. Powered By Joel Consultancy Limited.  </small>

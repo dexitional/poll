@@ -22,8 +22,8 @@ function fetch($url){
 
 // Authentication Checker
 function authenticate() {
-   $_SESSION['user'] = ['name'=> 'Kobby','id'=> '1','role_id'=> 5];
-   if (!isset($_SESSION['user']) || $_SESSION['user'] == null) {
+    //$_SESSION['user'] = ['name'=> 'Kobby','id'=> '1','role_id'=> 5];
+    if (!isset($_SESSION['user']) || $_SESSION['user'] == null) {
       $app = \Slim\Slim::getInstance();
       $app->flash('error', 'Login required');
       $app->redirect($app->urlFor('login'));
@@ -35,32 +35,33 @@ function authenticate() {
 $app->get('/', 'authenticate',function () use ($app) {
    if(isset($_SESSION['user'])){
       if(isset($_SESSION['user']) && $_SESSION['user']['role_id'] == '5'){
-         $app->render($app->urlFor('dashagent')); # Auth Login
+         $app->redirect($app->urlFor('dashagent')); 
       }else{
-         $app->render($app->urlFor('dashadmin')); # Auth Login
+         $app->redirect($app->urlFor('dashadmin')); 
       }
    }else{
       $app->redirect($app->urlFor('login')); # Auth Login
    }
-   
 })->name('index');
 
 
 $app->get('/dashagent',function () use ($app) {
    $app->render('mainlayout.php',[
       'page' => 'pages/admin/dashagent.php',
-      'slug' => 'agent',
+      'slug' => 'dashagent',
       'title' => 'AGENT DASHBOARD',
       'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
+      'app' => $app
    ]);
 })->name('dashagent');
 
 $app->get('/dashadmin',function () use ($app) {
    $app->render('mainlayout.php',[
-      'page' => 'pages/admin/dashagent.php',
-      'slug' => 'agent',
-      'title' => 'AGENT DASHBOARD',
+      'page' => 'pages/admin/dashadmin.php',
+      'slug' => 'dashadmin',
+      'title' => 'ADMIN DASHBOARD',
       'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
+      'app' => $app
    ]);
 })->name('dashadmin');
 
