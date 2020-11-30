@@ -32,7 +32,7 @@ CREATE TABLE `audit_trail` (
   `activity` varchar(200) DEFAULT NULL,
   `log_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 
 
@@ -55,7 +55,7 @@ CREATE TABLE `candidates` (
   `status` tinyint(1) DEFAULT NULL,
   `site_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 LOCK TABLES `candidates` WRITE;
 /*!40000 ALTER TABLE `candidates` DISABLE KEYS */;
@@ -91,7 +91,7 @@ CREATE TABLE `constituencies` (
   `district_id` int(6) DEFAULT '0',
   `status` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 LOCK TABLES `constituencies` WRITE;
 /*!40000 ALTER TABLE `constituencies` DISABLE KEYS */;
@@ -209,7 +209,7 @@ CREATE TABLE `districts` (
   `newly_created` tinyint(1) DEFAULT '0',
   `status` tinyint(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 LOCK TABLES `districts` WRITE;
 /*!40000 ALTER TABLE `districts` DISABLE KEYS */;
@@ -315,7 +315,7 @@ CREATE TABLE `election_types` (
   `election_type` varchar(100) DEFAULT NULL,
   `status` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 LOCK TABLES `election_types` WRITE;
 /*!40000 ALTER TABLE `election_types` DISABLE KEYS */;
@@ -342,7 +342,7 @@ CREATE TABLE `elections` (
   `election_date` date DEFAULT NULL,
   `status` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 LOCK TABLES `elections` WRITE;
 /*!40000 ALTER TABLE `elections` DISABLE KEYS */;
@@ -362,7 +362,7 @@ DROP TABLE IF EXISTS `electoral_areas`;
 
 CREATE TABLE `electoral_areas` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `area_name` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `area_name` varchar(250)  DEFAULT NULL,
   `constituency_id` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
@@ -390,7 +390,7 @@ CREATE TABLE `political_parties` (
   `party_code` varchar(10) DEFAULT NULL,
   `status` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 LOCK TABLES `political_parties` WRITE;
 /*!40000 ALTER TABLE `political_parties` DISABLE KEYS */;
@@ -444,7 +444,7 @@ CREATE TABLE `polling_stations` (
   `area_id` int(3) DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 LOCK TABLES `polling_stations` WRITE;
 /*!40000 ALTER TABLE `polling_stations` DISABLE KEYS */;
@@ -555,7 +555,7 @@ CREATE TABLE `regions` (
   `region_name` varchar(100) DEFAULT NULL,
   `status` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 LOCK TABLES `regions` WRITE;
 /*!40000 ALTER TABLE `regions` DISABLE KEYS */;
@@ -594,7 +594,7 @@ CREATE TABLE `roles` (
   `role_name` varchar(50) DEFAULT NULL,
   `status` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
@@ -621,11 +621,11 @@ CREATE TABLE `sites` (
   `election_id` int(11) DEFAULT NULL COMMENT 'Default Election for Monitor',
   `constituency_id` int(11) DEFAULT NULL COMMENT 'Operational Constituency ',
   `party_code` varchar(5) DEFAULT NULL COMMENT 'Site Owner Affiliation',
-  `slug` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Site Shortname',
-  `owner_name` varchar(350) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `slug` varchar(100)  DEFAULT NULL COMMENT 'Site Shortname',
+  `owner_name` varchar(350)  DEFAULT NULL,
   `owner_phone` varchar(15) DEFAULT NULL,
   `owner_email` varchar(255) DEFAULT NULL,
-  `owner_token` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `owner_token` varchar(100)  DEFAULT NULL,
   `owner_photo` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -658,7 +658,7 @@ CREATE TABLE `templates` (
   `party_id` int(2) DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 
 
@@ -685,7 +685,7 @@ CREATE TABLE `users` (
   `date_created` datetime DEFAULT NULL,
   `site_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
@@ -714,7 +714,7 @@ CREATE TABLE `votes_dump` (
   `updated_by` int(11) DEFAULT NULL,
   `site_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 LOCK TABLES `votes_dump` WRITE;
 /*!40000 ALTER TABLE `votes_dump` DISABLE KEYS */;
@@ -769,7 +769,7 @@ CREATE TABLE `votes_head` (
   `updated_by` int(11) DEFAULT NULL,
   `site_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 LOCK TABLES `votes_head` WRITE;
 /*!40000 ALTER TABLE `votes_head` DISABLE KEYS */;
