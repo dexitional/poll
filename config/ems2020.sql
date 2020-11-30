@@ -1,0 +1,806 @@
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 5446
+#
+# https://www.sequelpro.com/
+# https://github.com/sequelpro/sequelpro
+#
+# Host: 127.0.0.1 (MySQL 8.0.13)
+# Database: ems
+# Generation Time: 2020-11-30 09:04:15 +0000
+# ************************************************************
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+SET NAMES utf8mb4;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table audit_trail
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `audit_trail`;
+
+CREATE TABLE `audit_trail` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(6) DEFAULT NULL,
+  `activity` varchar(200) DEFAULT NULL,
+  `log_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+# Dump of table candidates
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `candidates`;
+
+CREATE TABLE `candidates` (
+  `id` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `lname` varchar(100) DEFAULT NULL,
+  `fname` varchar(100) DEFAULT NULL,
+  `mname` varchar(100) DEFAULT NULL,
+  `sex` enum('M','F') DEFAULT NULL,
+  `election_id` tinyint(1) DEFAULT NULL,
+  `election_type_id` int(2) DEFAULT NULL,
+  `constituency_id` int(3) DEFAULT NULL,
+  `ballot_position` int(3) DEFAULT NULL,
+  `party_id` int(2) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `site_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `candidates` WRITE;
+/*!40000 ALTER TABLE `candidates` DISABLE KEYS */;
+
+INSERT INTO `candidates` (`id`, `lname`, `fname`, `mname`, `sex`, `election_id`, `election_type_id`, `constituency_id`, `ballot_position`, `party_id`, `status`, `site_id`)
+VALUES
+	(000001,'ANSAH','MATHEW','','M',1,1,1,1,6,1,1),
+	(000002,'OWUSU','JESSICA','','F',1,1,1,2,10,1,1),
+	(000003,'ADJETEY','MENNILLANKA',NULL,'F',1,1,1,3,8,1,1),
+	(000004,'ATO-FORSON','MOSES',NULL,'M',1,1,1,4,17,1,1),
+	(000005,'WISON FOLLEY','JAMES',NULL,'M',1,1,1,5,13,1,1),
+	(000006,'ANSAH-KWOW','CHRISTOPHER',NULL,'M',1,1,1,6,12,1,1),
+	(000007,'FLETCHER','MARIAN','','F',1,2,1,7,4,1,1),
+	(000008,'FUSEINI','MOHAMMED',NULL,'M',1,2,1,1,7,1,1),
+	(000009,'OPOKU-AGYEMANG','OLIVA',NULL,'M',1,2,1,2,9,1,1),
+	(000012,'TEST','TEST','','M',1,1,1,50,1,1,1);
+
+/*!40000 ALTER TABLE `candidates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table constituencies
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `constituencies`;
+
+CREATE TABLE `constituencies` (
+  `id` int(3) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `const_code` varchar(10) DEFAULT NULL,
+  `constituency_name` varchar(100) DEFAULT NULL,
+  `registered_voters` int(6) DEFAULT '0',
+  `region_id` int(6) DEFAULT '0',
+  `district_id` int(6) DEFAULT '0',
+  `status` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `constituencies` WRITE;
+/*!40000 ALTER TABLE `constituencies` DISABLE KEYS */;
+
+INSERT INTO `constituencies` (`id`, `const_code`, `constituency_name`, `registered_voters`, `region_id`, `district_id`, `status`)
+VALUES
+	(001,'','ADANSI-ASOKWA',0,6,1,1),
+	(002,NULL,'FOMENA (ADANSI NORTH)',NULL,NULL,2,1),
+	(003,NULL,'NEW EDUBIASE',NULL,NULL,3,1),
+	(004,NULL,'AFIGYA KWABRE NORTH',NULL,NULL,4,1),
+	(005,NULL,'KWABRE WEST',NULL,NULL,5,1),
+	(006,NULL,'AHAFO ANO NORTH',NULL,NULL,6,1),
+	(007,NULL,'AHAFO ANO SOUTH EAST',NULL,NULL,7,1),
+	(008,NULL,'AHAFO ANO SOUTH WEST',NULL,NULL,8,1),
+	(009,NULL,'AKROFUOM',NULL,NULL,9,1),
+	(010,NULL,'ODOTOBRI',NULL,NULL,10,1),
+	(011,NULL,'MANSO NKWANTA',NULL,NULL,11,1),
+	(012,NULL,'MANSO EDUBIA',NULL,NULL,11,1),
+	(013,NULL,'ASANTE-AKIM CENTRAL',NULL,NULL,12,1),
+	(014,NULL,'ASANTE-AKIM NORTH',NULL,NULL,13,1),
+	(015,NULL,'ASANTE-AKIM SOUTH',NULL,NULL,14,1),
+	(016,NULL,'ASAWASE',NULL,NULL,15,1),
+	(017,NULL,'ATWIMA-KWANWOMA',NULL,NULL,16,1),
+	(018,NULL,'ATWIMA-MPONUA',NULL,NULL,17,1),
+	(019,NULL,'ATWIMA-NWABIAGYA NORTH',NULL,NULL,18,1),
+	(020,NULL,'ATWIMA-NWABIAGYA SOUTH',NULL,NULL,19,1),
+	(021,NULL,'BEKWAI',NULL,NULL,20,1),
+	(022,NULL,'BESOME-FREHO',NULL,NULL,21,1),
+	(023,NULL,'BOSOMTWE',NULL,NULL,22,1),
+	(024,NULL,'EJISU',NULL,NULL,23,1),
+	(025,NULL,'EJURA',NULL,NULL,24,1),
+	(026,NULL,'JUABEN',NULL,NULL,25,1),
+	(027,NULL,'ASOKWA',NULL,NULL,26,1),
+	(028,NULL,'BANTAMA',NULL,NULL,26,1),
+	(029,NULL,'KWADASO',NULL,NULL,26,1),
+	(030,NULL,'MANHYIA NORTH',NULL,NULL,26,1),
+	(031,NULL,'MANHYIA SOUTH',NULL,NULL,26,1),
+	(032,NULL,'NHYIAESO',NULL,NULL,26,1),
+	(033,NULL,'SUBIN',NULL,NULL,26,1),
+	(034,NULL,'KWABRE EAST',NULL,NULL,27,1),
+	(035,NULL,'MAMPONG',NULL,NULL,28,1),
+	(036,NULL,'OBUASE EAST',NULL,NULL,29,1),
+	(037,NULL,'OBUASE WEST',NULL,NULL,30,1),
+	(038,NULL,'OFFINSO NORTH',NULL,NULL,31,1),
+	(039,NULL,'OFFINSO SOUTH',NULL,NULL,32,1),
+	(040,NULL,'OFORIKROM',NULL,NULL,33,1),
+	(041,NULL,'OLD TAFO',NULL,NULL,34,1),
+	(042,NULL,'SEKYERE AFRAM PLAINS',NULL,NULL,35,1),
+	(043,NULL,'KUMAWU',NULL,NULL,36,1),
+	(044,NULL,'NSUTA-KWAMANG-BEPOSO',NULL,NULL,37,1),
+	(045,NULL,'AFIGYA SEKYERE WEST',NULL,NULL,37,1),
+	(046,NULL,'EFFIDUASE-ASSOKORE',NULL,NULL,37,1),
+	(047,NULL,'AFIAGYA SEKYERE EAST',NULL,NULL,38,1),
+	(048,NULL,'SUAME',NULL,NULL,39,1),
+	(049,NULL,'ATEBUBU-AMANTIN',NULL,NULL,40,1),
+	(050,NULL,'KINTAMPO NORTH',NULL,NULL,41,1),
+	(051,NULL,'KINTAMPO SOUTH',NULL,NULL,42,1),
+	(052,NULL,'NKORANZA NORTH',NULL,NULL,43,1),
+	(053,NULL,'NKORANZA SOUTH',NULL,NULL,44,1),
+	(054,NULL,'PRU EAST',NULL,NULL,45,1),
+	(055,NULL,'PRU WEST',NULL,NULL,46,1),
+	(056,NULL,'SENE EAST',NULL,NULL,47,1),
+	(057,NULL,'SENE WEST',NULL,NULL,48,1),
+	(058,NULL,'TECHIMAN NORTH',NULL,NULL,49,1),
+	(059,NULL,'TECHIMAN SOUTH',NULL,NULL,50,1),
+	(060,NULL,'BANDA AHENKRO',NULL,NULL,51,1),
+	(061,NULL,'BEREKUM EAST',NULL,NULL,52,1),
+	(062,NULL,'BEREKUM WEST',NULL,NULL,53,1),
+	(063,NULL,'DORMAA CENTRAL',NULL,NULL,54,1),
+	(064,NULL,'DORMAA EAST',NULL,NULL,55,1),
+	(065,NULL,'DORMAA WEST',NULL,NULL,56,1),
+	(066,NULL,'JAMAN NORTH',NULL,NULL,57,1),
+	(067,NULL,'JAMAN SOUTH',NULL,NULL,58,1),
+	(068,NULL,'SUNYANI EAST',NULL,NULL,59,1),
+	(069,NULL,'SUNYANI WEST',NULL,NULL,60,1),
+	(070,NULL,'TAIN',NULL,NULL,61,1),
+	(071,NULL,'WENCHI',NULL,NULL,62,1),
+	(072,NULL,'ABURA-ASEBU-KWAMANKESE',NULL,NULL,63,1),
+	(073,NULL,'AGONA EAST',NULL,NULL,64,1),
+	(074,NULL,'AGONA WEST',NULL,NULL,65,1),
+	(075,NULL,'AJUMAKO-ENYAN-ESSIAM',NULL,NULL,66,1),
+	(076,NULL,'ASIKUMA-ADOBEN-BRAKWA',NULL,NULL,67,1),
+	(077,NULL,'ASSIN CENTRAL',NULL,NULL,68,1),
+	(078,NULL,'ASSIN NORTH',NULL,NULL,69,1),
+	(079,NULL,'ASSIN SOUTH',NULL,NULL,70,1),
+	(080,NULL,'AWUTU-SENYA EAST',NULL,NULL,71,1),
+	(081,NULL,'AWUTU-SENYA WEST',NULL,NULL,72,1),
+	(082,NULL,'CAPE COAST NORTH',NULL,NULL,73,1),
+	(083,NULL,'CAPE COAST SOUTH',NULL,NULL,73,1),
+	(084,NULL,'EFFUTU',NULL,NULL,74,1),
+	(085,NULL,'EKUMFI',NULL,NULL,75,1),
+	(086,NULL,'GOMOA CENTRAL',NULL,NULL,76,1),
+	(087,NULL,'GOMOA EAST',NULL,NULL,77,1),
+	(088,NULL,'GOMOA WEST',NULL,NULL,78,1),
+	(089,NULL,'KOMENDA-EDINA-EGUAFO-ABIREM',NULL,NULL,79,1),
+	(090,NULL,'MFANTSIMAN',NULL,NULL,80,1),
+	(091,NULL,'TWIFO-ATII MORKWAA',NULL,NULL,81,1),
+	(092,NULL,'HEMANG LOWER DENKYIRA',NULL,NULL,82,1),
+	(093,NULL,'UPPER DENKYIRA EAST',NULL,NULL,83,1),
+	(094,NULL,'UPPER DENKYIRA WEST',NULL,NULL,85,1);
+
+/*!40000 ALTER TABLE `constituencies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table districts
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `districts`;
+
+CREATE TABLE `districts` (
+  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+  `district_name` varchar(100) DEFAULT NULL,
+  `region_id` int(2) DEFAULT NULL,
+  `newly_created` tinyint(1) DEFAULT '0',
+  `status` tinyint(11) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `districts` WRITE;
+/*!40000 ALTER TABLE `districts` DISABLE KEYS */;
+
+INSERT INTO `districts` (`id`, `district_name`, `region_id`, `newly_created`, `status`)
+VALUES
+	(1,'ADANSI ASOKWA DISTRICT',1,1,1),
+	(2,'ADANSI NORTH DISTRICT',1,1,1),
+	(3,'ADANSI SOUTH DISTRICT',1,0,1),
+	(4,'AFIGYA KWABRE NORTH DISTRICT',1,1,1),
+	(5,'AFIGYA KWABRE DISTRICT',1,0,1),
+	(6,'AHAFO ANO NORTH MUNICIPAL DISTRICT',1,0,1),
+	(7,'AHAFO ANO SOUTH EAST DISTRICT',1,1,1),
+	(8,'AHAFO ANO SOUTH WEST DISTRICT',1,1,1),
+	(9,'AKROFUOM DISTRICT',1,1,1),
+	(10,'AMANSIE CENTRAL DISTRICT',1,0,1),
+	(11,'AMANSIE WEST DISTRICT',1,0,1),
+	(12,'ASANTE-AKIM CENTRAL MUNICIPAL DISTRICT',1,1,1),
+	(13,'ASANTE-AKIM NORTH DISTRICT',1,0,1),
+	(14,'ASANTE-AKIM SOUTH MUNICIPAL DISTRICT',1,0,1),
+	(15,'ASOKORE MAMPONG MUNICIPAL DISTRICT',1,1,1),
+	(16,'ATWIMA KWANWOMA DISTRICT',1,0,1),
+	(17,'ATWIMA MPONUA DISTRICT',1,0,1),
+	(18,'ATWIMA NWABIAGYA NORTH DISTRICT',1,1,1),
+	(19,'ATWIMA NWABIAGYA MUNICIPAL DISTRICT',1,1,1),
+	(20,'BEKWAI MUNICIPAL DISTRICT',1,0,1),
+	(21,'BESOME FREHO DISTRICT',1,0,1),
+	(22,'BOSOMTWE DISTRICT',1,0,1),
+	(23,'EJISU MUNICIPAL DISTRICT',1,1,1),
+	(24,'EJURA SEKYEDUMASE MUNICIPAL DISTRICT',1,0,1),
+	(25,'JUABEN MUNICIPAL DISTRICT',1,1,1),
+	(26,'KUMASE METROPOLITAN DISTRICT',1,0,1),
+	(27,'KWABRE EAST MUNICIPAL DISTRICT',1,0,1),
+	(28,'MAMPONG MUNICIPAL DISTRICT',1,1,1),
+	(29,'OBUASE EAST DISTRICT',1,1,1),
+	(30,'OBUASE MUNICIPAL DISTRICT',1,0,1),
+	(31,'OFFINSO NORTH DISTRICT',1,0,1),
+	(32,'OFFINSO SOUTH MUNICIPAL DISTRICT',1,0,1),
+	(33,'OFORIKROM MUNICIPAL DISTRICT',1,1,1),
+	(34,'OLD TAFO MUNICIPAL DISTRICT',1,1,1),
+	(35,'SEKYERE AFRAM PLAINS DISTRICT',1,1,1),
+	(36,'SEKYERE KUMAWU DISTRICT',1,1,1),
+	(37,'SEKYERE CENTRAL DISTRICT',1,0,1),
+	(38,'SEKYERE SOUTH DISTRICT',1,0,1),
+	(39,'SUAME MUNICIPAL DISTRICT',1,1,1),
+	(40,'ATEBUBU AMANTIN MUNICIPAL DISTRICT',4,0,1),
+	(41,'KINTAMPO NORTH MUNICIPAL DISTRICT',4,0,1),
+	(42,'KINTAMPO SOUTH DISTRICT',4,0,1),
+	(43,'NKORANZA NORTH DISTRICT',4,0,1),
+	(44,'NKORANZA SOUTH MUNICIPAL DISTRICT',4,0,1),
+	(45,'PRU EAST DISTRICT',4,1,1),
+	(46,'PRU WEST DISTRICT',4,1,1),
+	(47,'SENE EAST DISTRICT',4,0,1),
+	(48,'SENE WEST DISTRICT',4,0,1),
+	(49,'TECHIMAN NORTH DISTRICT',4,0,1),
+	(50,'TECHIMAN MUNICIPAL DISTRICT',4,0,1),
+	(51,'BANDA DISTRICT',3,0,1),
+	(52,'BEREKUM MUNICIPAL DISTRICT',3,0,1),
+	(53,'BEREKUM WEST DISTRICT',3,1,1),
+	(54,'DORMAA CENTRAL MUNICIPAL DISTRICT',3,1,1),
+	(55,'DORMAA EAST DISTRICT',3,0,1),
+	(56,'DORMAA WEST DISTRICT',3,0,1),
+	(57,'JAMAN NORTH DISTRICT',3,0,1),
+	(58,'JAMAN SOUTH MUNICIPAL DISTRICT',3,0,1),
+	(59,'SUNYANI MUNICIPAL DISTRICT',3,0,1),
+	(60,'SUNYANI WEST DISTRICT',3,0,1),
+	(61,'TAIN DISTRICT',3,0,1),
+	(62,'WENCHI MUNICIPAL DISTRICT',3,0,1),
+	(63,'ABURA/ASEBU/KWAMANKESE DISTRICT',6,0,1),
+	(64,'AGONA EAST DISTRICT',6,0,1),
+	(65,'AGONA WEST MUNICIPAL DISTRICT',6,0,1),
+	(66,'AJUMAKO/ENYAN/ESSIAM DISTRICT',6,0,1),
+	(67,'ASIKUMA/ADOBEN/BRAKWA DISTRICT',6,0,1),
+	(68,'ASSIN CENTRAL MUNICIPAL DISTRICT',6,1,1),
+	(69,'ASSIN NORTH DISTRICT',6,1,1),
+	(70,'ASSIN SOUTH DISTRICT',6,0,1),
+	(71,'AWUTU SENYA EAST MUNICIPAL DISTRICT',6,1,1),
+	(72,'AWUTU SENYA WEST DISTRICT',6,1,1),
+	(73,'CAPE COAST METROPOLITAN ASSEMBLY',6,0,1),
+	(74,'EFFUTU MUNICIPAL DISTRICT',6,0,1),
+	(75,'EKUMFI DISTRICT',6,0,1),
+	(76,'GOMOA CENTRAL DISTRICT',6,1,1),
+	(77,'GOMOA EAST DISTRICT',6,0,1),
+	(78,'GOMOA WEST DISTRICT',6,0,1),
+	(79,'KOMENDA EDINA EGUAFO ABIREM MUNICIPAL DISTRICT',6,0,1),
+	(80,'MFANTSIMAN MUNICIPAL DISTRICT',6,0,1),
+	(81,'TWIFO ATII MORKWAA DISTRICT',6,1,1),
+	(82,'TWIFO/HEMAN/LOWER DENKYIRA DISTRICT',6,0,1),
+	(83,'UPPER DENKYIRA EAST MUNICIPAL DISTRICT',6,0,1),
+	(84,'UPPER DENKYIRA WEST DISTRICT',6,0,1);
+
+/*!40000 ALTER TABLE `districts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table election_types
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `election_types`;
+
+CREATE TABLE `election_types` (
+  `id` int(2) unsigned NOT NULL AUTO_INCREMENT,
+  `election_type` varchar(100) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `election_types` WRITE;
+/*!40000 ALTER TABLE `election_types` DISABLE KEYS */;
+
+INSERT INTO `election_types` (`id`, `election_type`, `status`)
+VALUES
+	(1,'PARLIAMENTARY',1),
+	(2,'PRESIDENTIAL',1),
+	(3,'REFERENDUM',0),
+	(4,'DISTRICT ASSEMBLY',0);
+
+/*!40000 ALTER TABLE `election_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table elections
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `elections`;
+
+CREATE TABLE `elections` (
+  `id` int(2) unsigned NOT NULL AUTO_INCREMENT,
+  `election_name` varchar(100) DEFAULT NULL,
+  `election_date` date DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `elections` WRITE;
+/*!40000 ALTER TABLE `elections` DISABLE KEYS */;
+
+INSERT INTO `elections` (`id`, `election_name`, `election_date`, `status`)
+VALUES
+	(1,'2020 GENERAL ELECTIONS','2020-12-07',1);
+
+/*!40000 ALTER TABLE `elections` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table electoral_areas
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `electoral_areas`;
+
+CREATE TABLE `electoral_areas` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `area_name` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `constituency_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `electoral_areas` WRITE;
+/*!40000 ALTER TABLE `electoral_areas` DISABLE KEYS */;
+
+INSERT INTO `electoral_areas` (`id`, `area_name`, `constituency_id`, `status`)
+VALUES
+	(1,'TEST AREA',1,1);
+
+/*!40000 ALTER TABLE `electoral_areas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table political_parties
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `political_parties`;
+
+CREATE TABLE `political_parties` (
+  `id` int(2) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `party_name` varchar(100) DEFAULT NULL,
+  `party_code` varchar(10) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `political_parties` WRITE;
+/*!40000 ALTER TABLE `political_parties` DISABLE KEYS */;
+
+INSERT INTO `political_parties` (`id`, `party_name`, `party_code`, `status`)
+VALUES
+	(01,'ALL PEOPLE\'S CONGRESS','APC',1),
+	(02,'CONVENTION PEOPLE\'S PARTY','CPP',1),
+	(03,'DEMOCRATIC FREEDOM PARTY','DFP',1),
+	(04,'DEMOCRATIC PEOPLE\'S PARTY','DPP',1),
+	(05,'EAGLE PARTY','EP',1),
+	(06,'GREAT CONSOLIDATED POPULAR PARTY','GCPP',1),
+	(07,'GHANA NATIONAL PARTY','GNP',1),
+	(08,'GHANA FREEDOM PARTY','GFP',1),
+	(09,'GHANA UNION MOVEMENT','GUM',1),
+	(10,'LIBERAL PARTY OF GHANA','LPG',1),
+	(11,'NATIONAL DEMOCRATIC CONGRESS','NDC',1),
+	(12,'NATIONAL DEMOCRATIC PARTY','NDP',1),
+	(13,'NEW PATRIOTIC PARTY','NPP',1),
+	(14,'NATIONAL REFORM PARTY','NRP',1),
+	(15,'NEW VISION PARTY','NVP',1),
+	(16,'PEOPLE\'S NATIONAL CONVENTION','PNC',1),
+	(17,'PROGRESSIVE PEOPLE\'S PARTY','PPP',1),
+	(18,'PEOPLE\'S ACTION PARTY','PAP',1),
+	(19,'PEOPLE\'S DESTINY PARTY','PDP',1),
+	(20,'REFORMED PATRIOTIC DEMOCRATS','RPD',1),
+	(21,'UNITED GHANA MOVEMENT','UGM',1),
+	(22,'UNITED DEVELOPMENT SYSTEM PARTY','UDSP',1),
+	(23,'UNITED RENAISSANCE PARTY','URP',1),
+	(24,'UNITED FRONT PARTY','UFP',1),
+	(25,'UNITED DEMOCRATIC PARTY','UDP',1),
+	(26,'UNITED PROGRESSIVE PARTY','UPP',1),
+	(27,'INDEPENDENT CANDIDATE','IC',1);
+
+/*!40000 ALTER TABLE `political_parties` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table polling_stations
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `polling_stations`;
+
+CREATE TABLE `polling_stations` (
+  `id` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `station_name` varchar(100) DEFAULT NULL,
+  `station_code` varchar(50) DEFAULT NULL,
+  `serial_num` varchar(50) DEFAULT NULL,
+  `total_reg_voters` int(6) DEFAULT NULL,
+  `constituency_id` int(3) DEFAULT NULL,
+  `area_id` int(3) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `polling_stations` WRITE;
+/*!40000 ALTER TABLE `polling_stations` DISABLE KEYS */;
+
+INSERT INTO `polling_stations` (`id`, `station_name`, `station_code`, `serial_num`, `total_reg_voters`, `constituency_id`, `area_id`, `status`)
+VALUES
+	(000001,'MOUNT ZION PRIMARY','F021501','403001',600,1,1,1),
+	(000002,'JHS BODWESANGO','F020201','403002',400,1,0,1),
+	(000003,'SDA PRIM SCH BODWESANGO','F020202','403003',220,1,NULL,1),
+	(000004,'L/A PRIM SCH ABOABO NO2 (A)','F020203','403004',314,1,NULL,1),
+	(000005,'L/A PRIM SCH NKONSA','F020204','403005',1370,1,NULL,1),
+	(000006,'L/A PRIM SCH NYANKOMASU','F020205','403006',820,1,NULL,1),
+	(000007,'METH PRIM HWEREMOASE','F020206','403007',671,1,NULL,1),
+	(000008,'L/A JHS HWEREMOASE','F020207','403008',345,1,NULL,1),
+	(000009,'L/A PRIM SCH CHIRABROSO','F020208','403009',762,1,NULL,1),
+	(000010,'L/A J S S TEWOBABI','F020209','403010',398,1,NULL,1),
+	(000011,'L/A PRIM SCH ADIEMBRA','F020210','403011',260,1,NULL,1),
+	(000012,'L/A PRIM NYANKUMASU','F020211','403012',654,1,NULL,1),
+	(000013,'TEMP BOOTH TASILIMAN','F020212','403013',234,1,NULL,1),
+	(000014,'TEMP BOOTH NYAMEBEKYERE','F020213','403014',456,1,NULL,1),
+	(000015,'L/AJSS\'1\'FUMSO','F020214','403015',721,1,NULL,1),
+	(000016,'L/AJSS(2)FUMSO','F020215','403016',623,2,NULL,1),
+	(000017,'L/A PRIM FUMSO','F020216','403017',298,2,NULL,1),
+	(000018,'TEMP BOOTH NYAMEBEKYERE','F020217','403018',311,2,NULL,1),
+	(000019,'R/C PRIM SCH NKWANTENSO','F020218','403019',421,2,NULL,1),
+	(000020,'L/A PRIM SIANA','F020218','403020',325,2,0,1),
+	(000021,'L/A PRIM SCH ASIRIFIKROM','F020219','403021',879,2,NULL,1),
+	(000022,'L/A PRIM SCH FUMSO-KETEWA','F020220','403022',655,2,NULL,1),
+	(000023,'L/A PRIM SCH MOSIKROM','F020221','403023',452,2,NULL,1),
+	(000024,'DOMPOASE SEC SCHOOL','F020222','403024',287,2,NULL,1),
+	(000025,'METHODIST PRIM DOMPOASE','F020223','403025',354,2,NULL,1),
+	(000026,'ADOKWAI METH PRIM SCH','F020224','403026',277,2,NULL,1),
+	(000027,'L/A PRIM SCH AHINSAN','F020225','403027',288,2,NULL,1),
+	(000028,'COCOA SHED DOMPOASE','F020226','403028',299,2,NULL,1),
+	(000029,'METHODIST CHURCH MANSIA','F020227','403029',344,2,NULL,1),
+	(000030,'ROMAN CATHOLIC PRIM MEDOMA','F020228','403030',422,2,NULL,1),
+	(000031,'L/A PRIM SCH OLD EDUBIASE','F020229','403031',266,2,NULL,1);
+
+/*!40000 ALTER TABLE `polling_stations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table polling_voters
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `polling_voters`;
+
+CREATE TABLE `polling_voters` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `station_id` int(11) DEFAULT NULL,
+  `election_id` int(11) DEFAULT NULL,
+  `total_reg_voters` int(11) DEFAULT '0',
+  `posted` int(11) DEFAULT '0',
+  `posted_at` timestamp NULL DEFAULT NULL,
+  `site_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `polling_voters` WRITE;
+/*!40000 ALTER TABLE `polling_voters` DISABLE KEYS */;
+
+INSERT INTO `polling_voters` (`id`, `station_id`, `election_id`, `total_reg_voters`, `posted`, `posted_at`, `site_id`)
+VALUES
+	(1,1,1,600,0,NULL,1),
+	(2,2,1,400,0,NULL,1),
+	(3,3,1,9999,0,NULL,1),
+	(4,4,1,9999,0,NULL,1),
+	(5,5,1,9999,0,NULL,1),
+	(6,6,1,9999,0,NULL,1),
+	(7,7,1,9999,0,NULL,1),
+	(8,8,1,9999,0,NULL,1),
+	(9,9,1,9999,0,NULL,1),
+	(10,10,1,9999,0,NULL,1),
+	(11,11,1,9999,0,NULL,1),
+	(12,12,1,9999,0,NULL,1),
+	(13,13,1,9999,0,NULL,1),
+	(14,14,1,9999,0,NULL,1),
+	(15,15,1,9999,0,NULL,1),
+	(16,16,1,9999,0,NULL,1),
+	(17,17,1,9999,0,NULL,1),
+	(18,18,1,9999,0,NULL,1),
+	(19,19,1,9999,0,NULL,1),
+	(20,20,1,9999,0,NULL,1),
+	(21,21,1,9999,0,NULL,1),
+	(22,22,1,9999,0,NULL,1),
+	(23,23,1,9999,0,NULL,1),
+	(24,24,1,9999,0,NULL,1),
+	(25,25,1,9999,0,NULL,1),
+	(26,26,1,9999,0,NULL,1),
+	(27,27,1,9999,0,NULL,1),
+	(28,28,1,9999,0,NULL,1),
+	(29,29,1,9999,0,NULL,1),
+	(30,30,1,9999,0,NULL,1),
+	(31,31,1,9999,0,NULL,1);
+
+/*!40000 ALTER TABLE `polling_voters` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table regions
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `regions`;
+
+CREATE TABLE `regions` (
+  `id` int(2) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `region_code` varchar(2) DEFAULT NULL,
+  `region_name` varchar(100) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `regions` WRITE;
+/*!40000 ALTER TABLE `regions` DISABLE KEYS */;
+
+INSERT INTO `regions` (`id`, `region_code`, `region_name`, `status`)
+VALUES
+	(01,'AH','AHAFO',1),
+	(02,'AS','ASHANTI',1),
+	(03,'BR','BONO',1),
+	(04,'BE','BONO EAST',1),
+	(05,'BA','BRONG AHAFO',1),
+	(06,'CR','CENTRAL',1),
+	(07,'ER','EASTERN',1),
+	(08,'GR','GREATER ACCRA',1),
+	(09,'NE','NORTH EAST',1),
+	(10,'NR','NORTHERN',1),
+	(11,'OT','OTI',1),
+	(12,'SR','SAVANNAH',1),
+	(13,'UE','UPPER EAST',1),
+	(14,'UW','UPPER WEST',1),
+	(15,'VR','VOLTA',1),
+	(16,'WR','WESTERN',1),
+	(17,'WN','WESTERN NORTH',1);
+
+/*!40000 ALTER TABLE `regions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table roles
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `roles`;
+
+CREATE TABLE `roles` (
+  `id` int(2) unsigned NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(50) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+
+INSERT INTO `roles` (`id`, `role_name`, `status`)
+VALUES
+	(1,'SUPER ADMIN',1),
+	(2,'NATIONAL ADMIN',0),
+	(3,'REGIONAL ADMIM',0),
+	(4,'CONSTITUENCY ADMIN',1),
+	(5,'POLLING AGENT',1);
+
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table sites
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sites`;
+
+CREATE TABLE `sites` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `election_id` int(11) DEFAULT NULL COMMENT 'Default Election for Monitor',
+  `constituency_id` int(11) DEFAULT NULL COMMENT 'Operational Constituency ',
+  `party_code` varchar(5) DEFAULT NULL COMMENT 'Site Owner Affiliation',
+  `slug` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Site Shortname',
+  `owner_name` varchar(350) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `owner_phone` varchar(15) DEFAULT NULL,
+  `owner_email` varchar(255) DEFAULT NULL,
+  `owner_token` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `owner_photo` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `sites` WRITE;
+/*!40000 ALTER TABLE `sites` DISABLE KEYS */;
+
+INSERT INTO `sites` (`id`, `election_id`, `constituency_id`, `party_code`, `slug`, `owner_name`, `owner_phone`, `owner_email`, `owner_token`, `owner_photo`, `created_at`)
+VALUES
+	(1,1,1,'NDC','test100','HON. JOHN AMPOFO','0277675089','test@gmail.com','12345',NULL,NULL);
+
+/*!40000 ALTER TABLE `sites` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table templates
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `templates`;
+
+CREATE TABLE `templates` (
+  `id` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `lname` varchar(100) DEFAULT NULL,
+  `fname` varchar(100) DEFAULT NULL,
+  `mname` varchar(100) DEFAULT NULL,
+  `sex` enum('M','F') DEFAULT NULL,
+  `election_id` tinyint(1) DEFAULT NULL,
+  `ballot_position` int(3) DEFAULT NULL,
+  `party_id` int(2) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+# Dump of table users
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `id` int(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `lname` varchar(100) DEFAULT NULL,
+  `fname` varchar(100) DEFAULT NULL,
+  `mname` varchar(100) DEFAULT NULL,
+  `cellphone` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `party_id` int(2) DEFAULT NULL,
+  `role_id` int(2) DEFAULT NULL,
+  `station_id` int(6) DEFAULT NULL,
+  `constituency_id` int(11) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `site_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`id`, `lname`, `fname`, `mname`, `cellphone`, `email`, `dob`, `username`, `password`, `party_id`, `role_id`, `station_id`, `constituency_id`, `status`, `date_created`, `site_id`)
+VALUES
+	(000001,'OWUSU','ANDREWS','','0200500068','ndr@gmail.com','2020-11-05','aowusu','3e3add19e7da07caad7b6bac1abca2ad',NULL,5,2,1,1,'2020-09-02 00:00:00',1),
+	(000002,'ACKAH','EBENEZER','KWABENA BLAY','0277675089','eben@gmail.com','2020-11-05','dexitional','ee0cb00d6f0f41f9950e7e8d5c8382a1',NULL,5,1,1,1,'2020-09-02 00:00:00',1);
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table votes_dump
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `votes_dump`;
+
+CREATE TABLE `votes_dump` (
+  `id` int(5) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `head_id` int(6) DEFAULT NULL,
+  `candidate_id` int(6) DEFAULT NULL,
+  `station_id` int(6) DEFAULT NULL,
+  `valid_votes` int(6) DEFAULT '0',
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` int(11) DEFAULT NULL,
+  `site_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `votes_dump` WRITE;
+/*!40000 ALTER TABLE `votes_dump` DISABLE KEYS */;
+
+INSERT INTO `votes_dump` (`id`, `head_id`, `candidate_id`, `station_id`, `valid_votes`, `updated_at`, `updated_by`, `site_id`)
+VALUES
+	(00001,NULL,1,1,NULL,NULL,NULL,NULL),
+	(00002,NULL,2,1,NULL,NULL,NULL,NULL),
+	(00003,NULL,3,1,NULL,NULL,NULL,NULL),
+	(00004,NULL,4,1,NULL,NULL,NULL,NULL),
+	(00005,NULL,5,1,NULL,NULL,NULL,NULL),
+	(00006,NULL,6,1,NULL,NULL,NULL,NULL),
+	(00007,NULL,7,1,NULL,NULL,NULL,NULL),
+	(00008,NULL,8,1,NULL,NULL,NULL,NULL),
+	(00009,NULL,9,1,NULL,NULL,NULL,NULL),
+	(00025,24,12,1,400,'2020-11-29 15:12:10',1,1),
+	(00026,25,12,2,0,'2020-11-27 23:12:38',NULL,1),
+	(00027,26,12,3,0,'2020-11-27 23:12:38',NULL,1),
+	(00028,27,12,4,0,'2020-11-27 23:12:38',NULL,1),
+	(00029,28,12,5,0,'2020-11-27 23:12:38',NULL,1),
+	(00030,29,12,6,0,'2020-11-27 23:12:38',NULL,1),
+	(00031,30,12,7,0,'2020-11-27 23:12:38',NULL,1),
+	(00032,31,12,8,0,'2020-11-27 23:12:38',NULL,1),
+	(00033,32,12,9,0,'2020-11-27 23:12:38',NULL,1),
+	(00034,33,12,10,0,'2020-11-27 23:12:38',NULL,1),
+	(00035,34,12,11,0,'2020-11-27 23:12:38',NULL,1),
+	(00036,35,12,12,0,'2020-11-27 23:12:38',NULL,1),
+	(00037,36,12,13,0,'2020-11-27 23:12:38',NULL,1),
+	(00038,37,12,14,0,'2020-11-27 23:12:38',NULL,1),
+	(00039,38,12,15,0,'2020-11-27 23:12:38',NULL,1);
+
+/*!40000 ALTER TABLE `votes_dump` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table votes_head
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `votes_head`;
+
+CREATE TABLE `votes_head` (
+  `id` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `station_id` int(5) DEFAULT NULL,
+  `rejected_votes` int(6) DEFAULT NULL,
+  `total_votes_cast` int(6) DEFAULT NULL,
+  `election_id` int(2) DEFAULT NULL,
+  `election_type_id` int(2) DEFAULT NULL,
+  `posted` tinyint(1) DEFAULT NULL,
+  `posted_at` timestamp NULL DEFAULT NULL,
+  `posted_by` int(11) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` int(11) DEFAULT NULL,
+  `site_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `votes_head` WRITE;
+/*!40000 ALTER TABLE `votes_head` DISABLE KEYS */;
+
+INSERT INTO `votes_head` (`id`, `station_id`, `rejected_votes`, `total_votes_cast`, `election_id`, `election_type_id`, `posted`, `posted_at`, `posted_by`, `updated_at`, `updated_by`, `site_id`)
+VALUES
+	(2,1,NULL,NULL,1,2,NULL,NULL,NULL,'2020-11-27 07:36:47',NULL,1),
+	(24,1,30,NULL,1,1,1,NULL,1,'2020-11-29 15:12:10',1,1),
+	(25,2,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(26,3,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(27,4,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(28,5,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(29,6,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(30,7,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(31,8,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(32,9,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(33,10,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(34,11,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(35,12,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(36,13,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(37,14,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1),
+	(38,15,NULL,NULL,1,1,NULL,NULL,NULL,'2020-11-27 23:12:38',NULL,1);
+
+/*!40000 ALTER TABLE `votes_head` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

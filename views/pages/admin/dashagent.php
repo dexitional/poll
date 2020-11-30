@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-md-3 col-xs-12">
                         <div class="card bg-danger">
-                            <a href="<?= $app->urlFor('candid') ?>" class="no-border">
+                            <a href="<?= $app->urlFor('resultstation') ?>" class="no-border">
                             <div class="card-body text-center text-white">
                                 <i class="fa fa-4x mb-2 fa-bar-chart-o" aria-hidden="true"></i>
                                 <b><center>DETAILED RESULTS</center></b>

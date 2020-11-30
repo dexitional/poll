@@ -797,4 +797,23 @@ $app->get('/resultsum', 'authenticate',function () use ($app) {
 })->name('resultsum');
 
 
+$app->get('/resultstation', 'authenticate',function () use ($app) {
+   require_once './config/db.php';
+   $id = $_SESSION['user']['station_id'];
+   $pres = []; $pars = [];
+   $sql2 = $db->query("select d.*,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code,v.rejected_votes,v.total_votes_cast from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where v.election_type_id = 2 and d.site_id = ".$_SESSION['user']['site_id']." and d.station_id = ".$id);
+   $sql3 = $db->query("select d.*,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code,v.rejected_votes,v.total_votes_cast from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where v.election_type_id = 1 and d.site_id = ".$_SESSION['user']['site_id']." and d.station_id = ".$id);
+   if($sql2->num_rows > 0){ while($row = $sql2->fetch_assoc()){ $pres[] = $row; }}
+   if($sql3->num_rows > 0){ while($row = $sql3->fetch_assoc()){ $pars[] = $row; }}
+   $app->render('mainlayout.php',[
+      'page' => 'pages/admin/resultdetail.php',
+      'slug' => 'entries',
+      'title' => 'ADANSI SOKWA POLLING STATIONS RESULTS ENTRY',
+      'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
+      'pres' => $pres, 'pars' => $pars,'app' => $app
+   ]);
+})->name('resultstation');
+
+
+
 

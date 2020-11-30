@@ -70,7 +70,7 @@
                                 <td><b class="text-danger">** REJECTED VOTES</b></td>
                                 <td> <?= $row['rejected_votes']; ?> </td>
                                 <td><b class="text-danger">** TOTAL VOTES CAST</b></td>
-                                <td> <?= $row['rejected_votes']; ?> </td>
+                                <td> <?= $row['total_votes_cast']; ?> </td>
                           </tr>
                           <?php }else{ ?>
                              <tr><td colspan="5" align="center"> <b>No Presidential Candidacy found for polling station!</b></td></tr>
