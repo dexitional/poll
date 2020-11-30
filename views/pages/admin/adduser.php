@@ -59,6 +59,21 @@
                                 <?php }} ?>
                                 </select>
                             </div>
+                            <?php if($_SESSION['user']['role_id'] == 1){ ?>
+                            <div class="form-group">
+                                <label for="constituency_id">SITE ID</label>
+                                <select name="site_id" id="site_id" class="form-control">
+                                   <option value=""> -- CHOOSE --</option>
+                                <?php 
+                                    if(count($sites) > 0){
+                                       foreach($sites as $rx){
+                                ?>  
+                                    <option value="<?= $rx['id'] ?>" <?= $row['id'] > 0 && $row['site_id'] == $rx['id'] ? 'selected="selected"':'' ?>><?= $rx['slug'].' - '.$rx['party_code'].' ( '.$rx['owner_name'].' )' ?></option>
+                                <?php }} ?>
+                                </select>
+                            </div>
+                            <?php } ?>
+
                             <div class="form-group">
                                 <label for="status">STATUS</label>
                                 <select name="status" id="status" class="form-control">

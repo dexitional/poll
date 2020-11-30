@@ -54,18 +54,18 @@
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <button type="button" tabindex="0" class="dropdown-item">User Account</button>
-                                            <button type="button" tabindex="0" class="dropdown-item">Settings</button>
+                                            <a onclick="return confirm('Change password ?')" href="<?= $app->urlFor('logout'); ?>" class="dropdown-item">Change Password</a>
+                                            <a onclick="return confirm('Logout of session ?')" href="<?= $app->urlFor('logout'); ?>" class="dropdown-item">Logout</a>
                                             
                                         </div>
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        George Asiedu
+                                        <?= $_SESSION['user']['name'] ?>
                                     </div>
                                     <div class="widget-subheading">
-                                        Polling Agent
+                                        <b><?= $_SESSION['user']['role_name'] ?></b>
                                     </div>
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">
@@ -302,11 +302,11 @@
                 <div class="scrollbar-sidebar bg-light sidebar-text-dark active">
                     <div class="app-sidebar__inner">
                         <div class="d-flex align-items-center">
-                            <img src="./public/images/ndc_logo.png" class="img-fluid" height="80px" >
+                            <img src="<?= $_SESSION['asset']?>/public/images/ndc_logo.png" class="img-fluid" height="80px" >
                         </div>
                         <ul class="vertical-nav-menu">
                             <?php if($_SESSION['user']['role_id'] != 5){ ?>
-                            <li class="app-sidebar__heading">CONSITUENCY ADMINISTRATOR</li>
+                            <li class="app-sidebar__heading">CONSTITUENCY ADMINISTRATOR</li>
                             <li><a href="<?= $app->urlFor('index'); ?>" class="<?= $slug == 'dashadmin'?'mm-active':''?>">ADMIN DASHBOARD</a></li>
                             <?php } if($_SESSION['user']['role_id'] == 5){ ?>
                             <li class="app-sidebar__heading">POLLING AGENT DASHBOARD</li>

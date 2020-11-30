@@ -39,8 +39,9 @@
                                     <td><?= $row['total_reg_voters']; ?></td>
                                     <td>
                                         <div class="btn btn-group">
+                                        <a href="<?= $app->urlFor('pollentries',['id'=>$row['id']]); ?>" class="btn btn-xs btn-dark">ENTRIES</a>
                                             <a href="<?= $app->urlFor('editstation',['id'=>$row['id']]); ?>" class="btn btn-xs btn-success"><i class="fa fa-edit"></i></a>
-                                            <a href="<?= $app->urlFor('delstation',['id'=>$row['id']]); ?>" class="btn btn-xs btn-danger" onclick="return confirm('Delete record ?')"><i class="fa fa-trash"></i></a>
+                                            <a href="<?= $app->urlFor('delstation',['id'=>$row['id']]); ?>" class="btn btn-xs btn-danger" onclick="return confirm('Delete record ?');"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                   </tr>

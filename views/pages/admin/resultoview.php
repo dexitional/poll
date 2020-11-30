@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>2020 GENERAL ELECTION MONITORING</title>
+<title><?= strtoupper($vars['election_name']); ?> MONITORING</title>
     
 <link rel="stylesheet" href="./public/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="./public/css/main_style.css">  
@@ -10,110 +10,59 @@
 </head>
 
 <body class="result-body">
-    <h1 class="main-title">ADANSI-ASOKWA CONSITUENCY</h1>
+   
+    <h1 class="main-title"><?= strtoupper($vars['constituency_name']); ?> CONSTITUENCY</h1>
+   
+   
     <div class="result-cover">
         <h2 class="result-title">
             PRESIDENTIAL RESULT
         </h2>
+        <?php 
+            if(count($pres) > 0){
+            foreach($pres  as $row){
+               
+        ?> 
+        
         <div class="can-cover">
              <div class="can-party">
-                 <img src="./public/images/ndc_logo.png" class="can-party-logo"/>
+                <img src="./public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="can-party-logo"/>
              </div>
-             <div class="can-name"> JOHN AMPOMAH</div>
+             <div class="can-name"> <?= $row['name']; ?></div>
              <div class="can-stat">
-                 <!--<img src="./public/images/ndc_logo.png" class="can-photo"/>-->
-                 <span class="can-num">#1</span>
-                 <div class="stat-cover"> 10023232
-                     <span class="stat-load">56.34 %</span>
-                 </div>
+                <span class="can-num">#<?= $row['ballot_position']; ?></span>
+                <div class="stat-cover"> <?= $row['valid_votes']; ?>
+                <span class="stat-load"><?= $row['total_votes_cast'] > 0 ? round(($row['valid_votes']/$row['total_votes_cast'])*100,2): 0 ; ?> %</span>
+                </div>
              </div>
         </div>
-
-
-        <div class="can-cover">
-             <div class="can-party">
-                 <img src="./public/images/ndc_logo.png" class="can-party-logo"/>
-             </div>
-             <div class="can-name"> JOHN AMPOMAH</div>
-             <div class="can-stat">
-                 <span class="can-num">#2</span>
-                 <div class="stat-cover"> 10023232
-                     <span class="stat-load">56.34 %</span>
-                 </div>
-             </div>
-        </div>
+        <?php }} ?>
     </div>
+
+
+
     <div class="result-cover">
         <h2 class="result-title">
             PARLIAMENTARY RESULT
         </h2>
-        <div class="can-cover">
-             <div class="can-party">
-                 <img src="./public/images/ndc_logo.png" class="can-party-logo"/>
-             </div>
-             <div class="can-name"> JOHN AMPOMAH</div>
-             <div class="can-stat">
-                 <img src="./public/images/ndc_logo.png" class="can-photo"/>
-                 <div class="stat-cover"> 10023232
-                     <span class="stat-load">56.34 %</span>
-                 </div>
-             </div>
-        </div>
-
-
-        <div class="can-cover">
-             <div class="can-party">
-                 <img src="./public/images/ndc_logo.png" class="can-party-logo"/>
-             </div>
-             <div class="can-name"> JOHN AMPOMAH</div>
-             <div class="can-stat">
-                 <img src="./public/images/ndc_logo.png" class="can-photo"/>
-                 <div class="stat-cover"> 10023232
-                     <span class="stat-load">56.34 %</span>
-                 </div>
-             </div>
-        </div>
-        
-
-        <div class="can-cover">
-             <div class="can-party">
-                 <img src="./public/images/ndc_logo.png" class="can-party-logo"/>
-             </div>
-             <div class="can-name"> JOHN AMPOMAH</div>
-             <div class="can-stat">
-                 <img src="./public/images/ndc_logo.png" class="can-photo"/>
-                 <div class="stat-cover"> 10023232
-                     <span class="stat-load">56.34 %</span>
-                 </div>
-             </div>
-        </div>
+        <?php 
+            if(count($pars) > 0){
+            foreach($pars as $row){
+        ?> 
         
         <div class="can-cover">
              <div class="can-party">
-                 <img src="./public/images/ndc_logo.png" class="can-party-logo"/>
+                <img src="<?= $_SESSION['asset']; ?>/public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="can-party-logo"/>
              </div>
-             <div class="can-name"> JOHN AMPOMAH</div>
+             <div class="can-name"> <?= $row['name']; ?></div>
              <div class="can-stat">
-                 <img src="./public/images/ndc_logo.png" class="can-photo"/>
-                 <div class="stat-cover"> 10023232
-                     <span class="stat-load">56.34 %</span>
-                 </div>
+                <span class="can-num">#<?= $row['ballot_position']; ?></span>
+                <div class="stat-cover"> <?= $row['valid_votes']; ?>
+                    <span class="stat-load"><?= $row['total_votes_cast'] > 0 ? round(($row['valid_votes']/$row['total_votes_cast'])*100,2): 0; ?> %</span>
+                </div>
              </div>
         </div>
-        <div class="can-cover">
-             <div class="can-party">
-                 <img src="./public/images/ndc_logo.png" class="can-party-logo"/>
-             </div>
-             <div class="can-name"> JOHN AMPOMAH</div>
-             <div class="can-stat">
-                 <img src="./public/images/ndc_logo.png" class="can-photo"/>
-                 <div class="stat-cover"> 10023232
-                     <span class="stat-load">56.34 %</span>
-                 </div>
-             </div>
-        </div>
-        
-
+        <?php }} ?>
     </div>
     
 </body>

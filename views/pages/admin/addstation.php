@@ -59,6 +59,7 @@
                             </div>
                             <div class="form-group">
                                 <input type="hidden" name="id" value="<?= $row['id']?>"/>
+                                <input type="hidden" name="pid" value="<?= $row['pid']?>"/>
                                 <input type="submit" class="btn btn-success form-control login-btn" value="SAVE">
                             </div>
 

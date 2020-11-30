@@ -18,8 +18,8 @@ $app = new \Slim\Slim(
 );
 
 // Globals
-//$_SESSION['asset'] = 'http://localhost/poll';
-$_SESSION['asset'] = 'https://holy.uccabs.live';
+$_SESSION['asset'] = 'http://localhost/poll';
+//$_SESSION['asset'] = 'https://holy.uccabs.live';
 //$app->db = require_once './config/db.php';
 
 // Route Handlers
