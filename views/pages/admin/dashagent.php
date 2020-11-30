@@ -39,8 +39,8 @@
                             </a>
                         </div>
                     </div>
-                    
-                   <div class="col-md-3 col-xs-12">
+                    <!--
+                    <div class="col-md-3 col-xs-12">
                         <div class="card bg-danger">
                             <a href="<?= $app->urlFor('candid') ?>" class="no-border">
                             <div class="card-body text-center text-white">
@@ -50,7 +50,7 @@
                             </a>
                         </div>
                     </div>
-                  
+                    -->
                 </div>
               </div>
           </div>

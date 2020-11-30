@@ -57,6 +57,7 @@
                             </a>
                         </div>
                     </div>
+                    <!--
                     <div class="col-md-3 col-xs-12 mt-3">
                         <div class="card bg-danger">
                             <a href="<?= $app->urlFor('agent',['cid'=>$_SESSION['user']['constituency_id'],'eid'=>$_SESSION['user']['election_id']]) ?>" class="no-border">
@@ -67,6 +68,7 @@
                             </a>
                         </div>
                     </div>
+                    -->
                     <div class="col-md-3 col-xs-12 mt-3">
                         <div class="card" style="background:brown">
                             <div class="card-body text-center text-white">
