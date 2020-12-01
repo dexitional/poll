@@ -8,7 +8,6 @@
                       <tr class="thead_red">
                           <th>BALLOT #</th>
                           <th>CANDIDATE</th>
-                          <th>&nbsp;</th>
                           <th>PARTY</th>
                           <th>VOTES</th>
                       </tr>
@@ -21,17 +20,19 @@
                           ?> 
                           <tr>
                             <td><em><b>#<?= $row['ballot_position']; ?></b></em></td>
-                            <td><?= $row['name']; ?></td>
-                            <td><?= $row['party_code']; ?></td>
-                            <td><?= $row['party_code']; ?></td>
-                            <td> <?= $row['valid_votes']; ?></td>
+                            <td><b><?= $row['name']; ?></b></td>
+                            <td>
+                                 <img src="<?= $_SESSION['asset'] ?>/public/images/<?= $row['party_code']; ?>_logo.png" height="20px"/>
+                                 <b style="font-size:18px;"><?= $row['party_code']; ?></b>
+                            </td>
+                            <td><b style="font-size:18px;"><?= $row['valid_votes']; ?></b></td>
                           </tr>
                           <?php } ?>
                           <tr>
                             <td><b class="text-danger">** REJECTED VOTES</b></td>
-                            <td> <?= $row['rejected_votes']; ?> </td>
+                            <td><b style="font-size:18px;"><?= $row['rejected_votes']; ?></b></td>
                             <td><b class="text-danger">** TOTAL VOTES CAST</b></td>
-                            <td> <?= $row['rejected_votes']; ?> </td>
+                            <td> <b style="font-size:18px;"><?= $row['rejected_votes']; ?></b></td>
                           </tr>
                           <?php }else{ ?>
                              <tr><td colspan="5" align="center"> <b>No Parliamentary Candidacy found for polling station!</b></td></tr>
@@ -59,18 +60,20 @@
                                 foreach($pres  as $row){
                           ?> 
                            <tr>
-                                <td><em><b>#<?= $row['ballot_position']; ?></b></em></td>
-                                <td><?= $row['name']; ?></td>
-                                <td><?= $row['party_code']; ?></td>
-                                <td><?= $row['party_code']; ?></td>
-                                <td> <?= $row['valid_votes']; ?></td>
+                            <td><em><b>#<?= $row['ballot_position']; ?></b></em></td>
+                            <td><b><?= $row['name']; ?></b></td>
+                            <td>
+                                 <img src="<?= $_SESSION['asset'] ?>/public/images/<?= $row['party_code']; ?>_logo.png" height="20px"/>
+                                 <b style="font-size:18px;"><?= $row['party_code']; ?></b>
+                            </td>
+                            <td><b style="font-size:18px;"><?= $row['valid_votes']; ?></b></td>
                           </tr>
                           <?php } ?>
                           <tr>
-                                <td><b class="text-danger">** REJECTED VOTES</b></td>
-                                <td> <?= $row['rejected_votes']; ?> </td>
-                                <td><b class="text-danger">** TOTAL VOTES CAST</b></td>
-                                <td> <?= $row['total_votes_cast']; ?> </td>
+                            <td><b class="text-danger">** REJECTED VOTES</b></td>
+                            <td><b style="font-size:18px;"><?= $row['rejected_votes']; ?></b></td>
+                            <td><b class="text-danger">** TOTAL VOTES CAST</b></td>
+                            <td> <b style="font-size:18px;"><?= $row['rejected_votes']; ?></b></td>
                           </tr>
                           <?php }else{ ?>
                              <tr><td colspan="5" align="center"> <b>No Presidential Candidacy found for polling station!</b></td></tr>

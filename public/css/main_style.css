@@ -136,9 +136,29 @@ table,tr,td{
     background: transparent;
     box-shadow: 0px 0px 10px #333;
     border-radius: 40px 0 40px 0;
-    padding: 40px 40px;
+    padding: 50px 40px 40px;
     border: 6px solid #f1f2f3;
     position: relative;
+}
+
+.result-cast{
+    position:absolute;
+    left:25px;top:0;
+    background:white;
+    color:#104929;
+    padding:2px 15px;
+    font-weight:bolder;
+    border-radius:0 0 5px 5px;
+}
+
+.result-reject{
+    position:absolute;
+    right:25px;top:0;
+    background:white;
+    color:#104929;
+    padding:2px 15px;
+    font-weight:bolder;
+    border-radius:0 0 5px 5px;
 }
 
 h2.result-title{
@@ -160,13 +180,13 @@ h2.result-title{
     align-items: center;
     width:50px;
     height:50px;
-    border-radius:50%;
     background:#f1f2f3;
     box-shadow:0 0 4px #333;
 }
 
 .can-party img{
     width:90%;
+    
 }
 .can-name{
     width:200px;
