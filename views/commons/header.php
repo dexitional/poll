@@ -56,7 +56,7 @@
         }
 
         .party_logo{
-            height: 20px;
+            height: 30px;
             margin-right:2px;
         }
 
