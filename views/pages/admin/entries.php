@@ -30,7 +30,7 @@
                             </td>
                           </tr>
                           <?php } ?>
-                          <tr>
+                          <tr class="thead_light">
                             <td><b class="text-danger">** REJECTED VOTES</b></td>
                             <td>                                
                                  <input type="number" name="rvotes_<?= $pars[0]['head_id']; ?>" class="vote_input" value="<?= $pars[0]['rejected_votes']; ?>" required/>
@@ -71,7 +71,7 @@
                               <?= $row['name']; ?>
                             </td>
                             <td class="party_code">
-                                <img src="<?= $_SESSION['asset']?>/public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="party_logo"/>
+                                <img src="<?= $_SESSION['asset']?>/public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="can_photo"/>
                                 <?= $row['party_code']; ?>
                             </td>
                             <td>
@@ -80,7 +80,7 @@
                           </tr>
                           <?php } ?>
 
-                          <tr>
+                          <tr class="thead_light">
                             <td><b class="text-danger">** REJECTED VOTES</b></td>
                             <td>                                
                                  <input type="number" name="rvotes_<?= $pres[0]['head_id']; ?>" class="vote_input" value="<?= $pres[0]['rejected_votes']; ?>" required/>

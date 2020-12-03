@@ -462,7 +462,7 @@ $app->get('/station', 'authenticate',function () use ($app) {
    if($sql->num_rows > 0){ while($row = $sql->fetch_assoc()){ $data[] = $row; }}
    $app->render('mainlayout.php',[
        'page' => 'pages/admin/station.php',
-       'slug' => 'station',
+       'slug' => 'dashadmin',
        'title' => 'POLLING STATIONS',
        'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
        'data' => $data, 'app' => $app
@@ -478,7 +478,7 @@ $app->get('/addstation', 'authenticate',function () use ($app) {
    if($sql3->num_rows > 0){ while($row = $sql3->fetch_assoc()){ $consts[] = $row; }}
    $app->render('mainlayout.php',[
        'page' => 'pages/admin/addstation.php',
-       'slug' => 'station',
+       'slug' => 'dashadmin',
        'title' => 'ADD POLLING STATION',
        'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
        'row' => ['id'=> 0,'pid'=> 0],'areas' => $areas,'consts' => $consts,'app' => $app
@@ -496,7 +496,7 @@ $app->get('/editstation/:id', 'authenticate',function ($id) use ($app) {
    $row = null; if($sql->num_rows > 0){ $row = $sql->fetch_assoc();}
    $app->render('mainlayout.php',[
        'page' => 'pages/admin/addstation.php',
-       'slug' => 'station',
+       'slug' => 'dashadmin',
        'title' => 'EDIT POLLING STATION',
        'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
        'row' => $row,'areas' => $areas,'consts' => $consts,'app' => $app
@@ -546,7 +546,7 @@ $app->get('/agent/:cid/:eid', 'authenticate',function ($cid,$eid) use ($app) {
    if($sql->num_rows > 0){ while($row = $sql->fetch_assoc()){ $data[] = $row; }}
    $app->render('mainlayout.php',[
        'page' => 'pages/admin/agent.php',
-       'slug' => 'agent',
+       'slug' => 'dashadmin',
        'title' => 'POLLING AGENTS',
        'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
        'data' => $data, 'app' => $app
@@ -564,7 +564,7 @@ $app->get('/addagent', 'authenticate',function () use ($app) {
    if($sql3->num_rows > 0){ while($row = $sql3->fetch_assoc()){ $stations[] = $row; }}
    $app->render('mainlayout.php',[
        'page' => 'pages/admin/addagent.php',
-       'slug' => 'agent',
+       'slug' => 'dashadmin',
        'title' => 'ADD POLLING AGENT',
        'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
        'row' => ['id'=> 0,'constituency_id'=>$cid,'election_id' => $eid],'users' => $users,'stations' => $stations,'app' => $app
@@ -583,7 +583,7 @@ $app->get('/editagent/:id', 'authenticate',function ($id) use ($app) {
    $row['election_id'] = $_SESSION['eid'];
    $app->render('mainlayout.php',[
        'page' => 'pages/admin/addagent.php',
-       'slug' => 'agent',
+       'slug' => 'dashadmin',
        'title' => 'EDIT POLLING AGENT',
        'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
        'row' => $row,'users' => $users,'stations' => $stations,'app' => $app
@@ -795,8 +795,39 @@ $app->get('/resultsum', 'authenticate',function () use ($app) {
    require_once './config/db.php';
    $pres = []; $pars = [];
    $vars = $db->query("select c.constituency_name,e.election_name from sites s left join constituencies c on c.id = s.constituency_id left join elections e on e.id = s.election_id where s.id = ".$_SESSION['user']['site_id'])->fetch_assoc();
-   $sql2 = $db->query("select distinct d.candidate_id,v.election_type_id,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where d.site_id = ".$_SESSION['user']['site_id']." and v.election_type_id = 2");
-   $sql3 = $db->query("select distinct d.candidate_id,v.election_type_id,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where d.site_id = ".$_SESSION['user']['site_id']." and v.election_type_id = 1");
+   $sql2 = $db->query("select distinct d.candidate_id,c.election_type_id,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where d.site_id = ".$_SESSION['user']['site_id']." and d.station_id = ".$_SESSION['user']['station_id']." and c.election_type_id = 2");
+   $sql3 = $db->query("select distinct d.candidate_id,c.election_type_id,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where d.site_id = ".$_SESSION['user']['site_id']." and d.station_id = ".$_SESSION['user']['station_id']." and c.election_type_id = 1");
+   $n = $db->query("select ifnull(sum(rejected_votes),0) as rvotes,ifnull(sum(total_votes_cast),0) as tvotes from votes_head where election_type_id = 2  and station_id = ".$_SESSION['user']['station_id']." and site_id = ".$_SESSION['user']['site_id'])->fetch_assoc();
+   if($sql2->num_rows > 0){ while($row = $sql2->fetch_assoc()){ 
+      $m = $db->query("select ifnull(sum(valid_votes),0) as votes from votes_dump where candidate_id = ".$row['candidate_id']."  and station_id = ".$_SESSION['user']['station_id']." and site_id = ".$_SESSION['user']['site_id'])->fetch_assoc();
+      $row['valid_votes'] = $m['votes'];
+      $row['rejected_votes'] = $n['rvotes'];
+      $row['total_votes_cast'] = $n['tvotes'];
+      $pres[] = $row;  
+   }}
+
+   if($sql3->num_rows > 0){ while($row = $sql3->fetch_assoc()){ 
+      $m = $db->query("select ifnull(sum(valid_votes),0) as votes from votes_dump where candidate_id = ".$row['candidate_id']." and station_id = ".$_SESSION['user']['station_id']." and site_id = ".$_SESSION['user']['site_id'])->fetch_assoc();
+      $row['valid_votes'] = $m['votes'];
+      $row['rejected_votes'] = $n['rvotes'];
+      $row['total_votes_cast'] = $n['tvotes'];
+      $pars[] = $row;
+   }}
+   $app->render('pages/admin/resultoview.php',[
+      'slug' => 'resultoview',
+      'title' => $vars['constituency_name'],
+      'subtitle' => $vars['constituency_name'],
+      'pres' => $pres, 'pars' => $pars,'app' => $app, 'vars' => $vars
+   ]);
+})->name('resultsum');
+
+
+$app->get('/resultall', 'authenticate',function () use ($app) {
+   require_once './config/db.php';
+   $pres = []; $pars = [];
+   $vars = $db->query("select c.constituency_name,e.election_name from sites s left join constituencies c on c.id = s.constituency_id left join elections e on e.id = s.election_id where s.id = ".$_SESSION['user']['site_id'])->fetch_assoc();
+   $sql2 = $db->query("select distinct d.candidate_id,c.election_type_id,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where d.site_id = ".$_SESSION['user']['site_id']." and c.election_type_id = 2");
+   $sql3 = $db->query("select distinct d.candidate_id,c.election_type_id,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where d.site_id = ".$_SESSION['user']['site_id']." and c.election_type_id = 1");
    $n = $db->query("select ifnull(sum(rejected_votes),0) as rvotes,ifnull(sum(total_votes_cast),0) as tvotes from votes_head where election_type_id = 2 and site_id = ".$_SESSION['user']['site_id'])->fetch_assoc();
    if($sql2->num_rows > 0){ while($row = $sql2->fetch_assoc()){ 
       $m = $db->query("select ifnull(sum(valid_votes),0) as votes from votes_dump where candidate_id = ".$row['candidate_id']." and site_id = ".$_SESSION['user']['site_id'])->fetch_assoc();
@@ -815,11 +846,11 @@ $app->get('/resultsum', 'authenticate',function () use ($app) {
    }}
    $app->render('pages/admin/resultoview.php',[
       'slug' => 'resultoview',
-      'title' => 'ADANSI SOKWA POLLING STATIONS RESULTS ENTRY',
-      'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
+      'title' => $vars['constituency_name'].' CONSTITUENCY',
+      'subtitle' => $vars['constituency_name'],
       'pres' => $pres, 'pars' => $pars,'app' => $app, 'vars' => $vars
    ]);
-})->name('resultsum');
+})->name('resultall');
 
 
 $app->get('/resultstation', 'authenticate',function () use ($app) {
@@ -832,7 +863,7 @@ $app->get('/resultstation', 'authenticate',function () use ($app) {
    if($sql3->num_rows > 0){ while($row = $sql3->fetch_assoc()){ $pars[] = $row; }}
    $app->render('mainlayout.php',[
       'page' => 'pages/admin/resultdetail.php',
-      'slug' => 'entries',
+      'slug' => 'dashadmin',
       'title' => 'ADANSI SOKWA POLLING STATIONS RESULTS ENTRY',
       'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
       'pres' => $pres, 'pars' => $pars,'app' => $app

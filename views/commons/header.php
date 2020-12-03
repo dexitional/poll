@@ -25,6 +25,10 @@
            color:#fff;
          }
 
+         .thead_light{
+           background: rgb(142 62 62 / 10%);
+         }
+
          .main-card {
            border:3px solid #196436;
          }
