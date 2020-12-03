@@ -20,7 +20,7 @@
                           ?> 
                           <tr>
                             <td><em><b>#<?= $rw['ballot_position']; ?></b></em></td>
-                            <td><?= $rw['name']; ?></td>
+                            <td> <b><?= $row['name']; ?></b></td>
                             <td class="party_code">
                                 <img src="<?= $_SESSION['asset']?>/public/images/<?= strtolower($rw['party_code']); ?>_logo.png" class="party_logo"/>
                                 <?= $rw['party_code']; ?>
