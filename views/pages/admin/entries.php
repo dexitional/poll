@@ -67,8 +67,14 @@
                           ?> 
                           <tr>
                             <td><em><b>#<?= $row['ballot_position']; ?></b></em></td>
-                            <td><?= $row['name']; ?></td>
-                            <td class="party_code"><?= $row['party_code']; ?></td>
+                            <td>
+                              <img src="./public/images/c<?= strtolower($row['ballot_position']); ?>.png" class="party_logo"/>
+                              <?= $row['name']; ?>
+                            </td>
+                            <td class="party_code">
+                                <img src="./public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="party_logo"/>
+                                <?= $row['party_code']; ?>
+                            </td>
                             <td>
                                 <input type="number" name="votes_<?= $row['id']; ?>" class="vote_input" value="<?= $row['valid_votes']; ?>" required/>
                             </td>
