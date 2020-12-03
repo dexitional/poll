@@ -22,7 +22,7 @@
                             <td><em><b>#<?= $row['ballot_position']; ?></b></em></td>
                             <td><?= $row['name']; ?></td>
                             <td class="party_code">
-                                <img src="./public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="party_logo"/>
+                                <img src="<?= $_SESSION['asset']?>/public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="party_logo"/>
                                 <?= $row['party_code']; ?>
 
                             </td>
@@ -68,11 +68,11 @@
                           <tr>
                             <td><em><b>#<?= $row['ballot_position']; ?></b></em></td>
                             <td>
-                              <img src="./public/images/c<?= strtolower($row['ballot_position']); ?>.png" class="party_logo"/>
+                              <img src="<?= $_SESSION['asset']?>/public/images/c<?= strtolower($row['ballot_position']); ?>.png" class="party_logo"/>
                               <?= $row['name']; ?>
                             </td>
                             <td class="party_code">
-                                <img src="./public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="party_logo"/>
+                                <img src="<?= $_SESSION['asset']?>/public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="party_logo"/>
                                 <?= $row['party_code']; ?>
                             </td>
                             <td>

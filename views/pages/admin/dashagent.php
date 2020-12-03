@@ -39,7 +39,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3 col-xs-12 mt-3">
+                    <div class="col-md-3 col-xs-12">
                         <div class="card" style="background:brown">
                             <div class="card-body text-center text-white">
                                 <h3><?= $voters; ?></h3>

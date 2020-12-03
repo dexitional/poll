@@ -22,8 +22,8 @@
                             <td><em><b>#<?= $row['ballot_position']; ?></b></em></td>
                             <td><b><?= $row['name']; ?></b></td>
                             <td>
-                                 <img src="<?= $_SESSION['asset'] ?>/public/images/<?= $row['party_code']; ?>_logo.png" height="20px"/>
-                                 <b style="font-size:18px;"><?= $row['party_code']; ?></b>
+                                <img src="<?= $_SESSION['asset']?>/public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="party_logo"/>
+                                <?= $row['party_code']; ?>
                             </td>
                             <td><b style="font-size:18px;"><?= $row['valid_votes']; ?></b></td>
                           </tr>
@@ -32,7 +32,7 @@
                             <td><b class="text-danger">** REJECTED VOTES</b></td>
                             <td><b style="font-size:18px;"><?= $row['rejected_votes']; ?></b></td>
                             <td><b class="text-danger">** TOTAL VOTES CAST</b></td>
-                            <td> <b style="font-size:18px;"><?= $row['rejected_votes']; ?></b></td>
+                            <td> <b style="font-size:18px;"><?= $row['total_votes_cast']; ?></b></td>
                           </tr>
                           <?php }else{ ?>
                              <tr><td colspan="5" align="center"> <b>No Parliamentary Candidacy found for polling station!</b></td></tr>
@@ -73,7 +73,7 @@
                             <td><b class="text-danger">** REJECTED VOTES</b></td>
                             <td><b style="font-size:18px;"><?= $row['rejected_votes']; ?></b></td>
                             <td><b class="text-danger">** TOTAL VOTES CAST</b></td>
-                            <td> <b style="font-size:18px;"><?= $row['rejected_votes']; ?></b></td>
+                            <td> <b style="font-size:18px;"><?= $row['total_votes_cast']; ?></b></td>
                           </tr>
                           <?php }else{ ?>
                              <tr><td colspan="5" align="center"> <b>No Presidential Candidacy found for polling station!</b></td></tr>
