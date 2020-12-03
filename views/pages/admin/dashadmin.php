@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-3 col-xs-12 mt-3">
                         <div class="card bg-danger">
-                            <a target="_blank" href="<?= $app->urlFor('resultsum') ?>" class="no-border">
+                            <a target="_blank" href="<?= $app->urlFor('resultall') ?>" class="no-border">
                             <div class="card-body text-center text-white">
                                 <i class="fa fa-list fa-4x mb-2"></i>
                                 <b><center>OVERALL RESULTS</center></b>
