@@ -42,7 +42,22 @@
         }
 
         .vote_input{
-          padding: 5px 10px;
+            padding: 5px 10px;
+            font-size: 18px;
+            font-style: italic;
+            color: blue;
+            width: 100px;
+        }
+
+        .party_code {
+            font-size: 18px !important;
+            font-weight:bolder;
+            color: #003366 !important;
+        }
+
+        .party_logo{
+            height: 20px;
+            margin-right:2px;
         }
 
         label{
