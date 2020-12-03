@@ -2,7 +2,7 @@
 <div class="row">
       <div class="col-lg-10">
           <div class="main-card mb-3 card">
-              <div class="card-body table-responsive"><h5 class="card-title">Parliamentary</h5>
+              <div class="card-body table-responsive"><h5 class="card-title">Presidential</h5>
                   <table class="mb-0 table table-striped">
                       <thead>
                       <tr class="thead_red">
@@ -42,7 +42,7 @@
                   </table>
               </div>
               <hr>
-              <div class="card-body table-responsive"><h5 class="card-title">Presidential</h5>
+              <div class="card-body table-responsive"><h5 class="card-title">Parliamentary</h5>
                   <table class="mb-0 table table-striped">
                       <thead>
                       <tr class="thead_green">
