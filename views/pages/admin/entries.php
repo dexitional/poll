@@ -67,7 +67,7 @@
                           <tr>
                             <td><em><b>#<?= $row['ballot_position']; ?></b></em></td>
                             <td>
-                              <img src="<?= $_SESSION['asset']?>/public/images/c<?= strtolower($row['ballot_position']); ?>.png" class="party_logo"/>
+                              <img src="<?= $_SESSION['asset']?>/public/images/c<?= strtolower($row['ballot_position']); ?>.png" class="party_logo" style="border-radius:5px"/>
                               <?= $row['name']; ?>
                             </td>
                             <td class="party_code">
