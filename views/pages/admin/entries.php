@@ -68,7 +68,7 @@
                             <td><em><b>#<?= $row['ballot_position']; ?></b></em></td>
                             <td>
                               <img src="<?= $_SESSION['asset']?>/public/images/c<?= strtolower($row['ballot_position']); ?>.png" class="party_logo" style="border-radius:5px"/>
-                              <?= $row['name']; ?>
+                              <b><?= $row['name']; ?></b>
                             </td>
                             <td class="party_code">
                                 <img src="<?= $_SESSION['asset']?>/public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="can_photo" style="height:30px;"/>
