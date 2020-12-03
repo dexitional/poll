@@ -735,8 +735,8 @@ $app->post('/candid', 'authenticate',function () use ($app) {
 $app->get('/entries', 'authenticate',function () use ($app) {
    require_once './config/db.php';
    $pres = []; $pars = [];
-   $sql2 = $db->query("select d.*,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code,v.rejected_votes from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where v.election_type_id = 2 and d.site_id = ".$_SESSION['user']['site_id']." and d.station_id = ".$_SESSION['user']['station_id']);
-   $sql3 = $db->query("select d.*,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code,v.rejected_votes from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where v.election_type_id = 1 and d.site_id = ".$_SESSION['user']['site_id']." and d.station_id = ".$_SESSION['user']['station_id']);
+   $sql2 = $db->query("select d.*,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code,v.rejected_votes,v.total_votes_cast from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where v.election_type_id = 2 and d.site_id = ".$_SESSION['user']['site_id']." and d.station_id = ".$_SESSION['user']['station_id']);
+   $sql3 = $db->query("select d.*,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code,v.rejected_votes,v.total_votes_cast from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where v.election_type_id = 1 and d.site_id = ".$_SESSION['user']['site_id']." and d.station_id = ".$_SESSION['user']['station_id']);
    if($sql2->num_rows > 0){ while($row = $sql2->fetch_assoc()){ $pres[] = $row; }}
    if($sql3->num_rows > 0){ while($row = $sql3->fetch_assoc()){ $pars[] = $row; }}
    $app->render('mainlayout.php',[
@@ -752,8 +752,8 @@ $app->get('/entries', 'authenticate',function () use ($app) {
 $app->get('/entries/:id', 'authenticate',function ($id) use ($app) {
    require_once './config/db.php';
    $pres = []; $pars = [];
-   $sql2 = $db->query("select d.*,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code,v.rejected_votes from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where v.election_type_id = 2 and d.site_id = ".$_SESSION['user']['site_id']." and d.station_id = ".$id);
-   $sql3 = $db->query("select d.*,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code,v.rejected_votes from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where v.election_type_id = 1 and d.site_id = ".$_SESSION['user']['site_id']." and d.station_id = ".$id);
+   $sql2 = $db->query("select d.*,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code,v.rejected_votes,v.total_votes_cast from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where v.election_type_id = 2 and d.site_id = ".$_SESSION['user']['site_id']." and d.station_id = ".$id);
+   $sql3 = $db->query("select d.*,concat(c.fname,ifnull(concat(' ',c.mname),''),' ',c.lname) as name,c.ballot_position,p.party_code,v.rejected_votes,v.total_votes_cast from votes_dump d left join votes_head v on d.head_id = v.id left join candidates c on c.id = d.candidate_id left join political_parties p on p.id = c.party_id where v.election_type_id = 1 and d.site_id = ".$_SESSION['user']['site_id']." and d.station_id = ".$id);
    if($sql2->num_rows > 0){ while($row = $sql2->fetch_assoc()){ $pres[] = $row; }}
    if($sql3->num_rows > 0){ while($row = $sql3->fetch_assoc()){ $pars[] = $row; }}
    $app->render('mainlayout.php',[
@@ -778,6 +778,8 @@ $app->post('/entries', 'authenticate',function () use ($app) {
         $ins = $db->query("update votes_dump set valid_votes = ${votes}, updated_by = ".$_SESSION['user']['id']." where id =".$id);
       }else if($mk[0] == 'rvotes'){
         $ins = $db->query("update votes_head set posted = 1,rejected_votes = ${votes}, updated_by = ".$_SESSION['user']['id'].", posted_by = ".$_SESSION['user']['id']." where id =".$id);
+      }else if($mk[0] == 'tvotes'){
+        $ins = $db->query("update votes_head set posted = 1,total_votes_cast = ${votes}, updated_by = ".$_SESSION['user']['id'].", posted_by = ".$_SESSION['user']['id']." where id =".$id);
       }
    }
    if($ins){
