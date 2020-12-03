@@ -2,7 +2,7 @@
 <div class="row">
       <div class="col-lg-10">
           <div class="main-card mb-3 card">
-              <div class="card-body table-responsive"><h5 class="card-title">Presidential</h5>
+              <div class="card-body table-responsive"><h5 class="card-title">Parliamentary</h5>
                   <table class="mb-0 table table-striped">
                       <thead>
                       <tr class="thead_red">
@@ -42,7 +42,7 @@
                   </table>
               </div>
               <hr>
-              <div class="card-body table-responsive"><h5 class="card-title">Parliamentary</h5>
+              <div class="card-body table-responsive"><h5 class="card-title">Presidential</h5>
                   <table class="mb-0 table table-striped">
                       <thead>
                       <tr class="thead_green">
@@ -61,7 +61,9 @@
                           ?> 
                            <tr>
                             <td><em><b>#<?= $row['ballot_position']; ?></b></em></td>
-                            <td><b><?= $row['name']; ?></b></td>
+                            <td>
+                              <b><?= $row['name']; ?></b>
+                            </td>
                             <td class="party_code">
                                 <img src="<?= $_SESSION['asset']?>/public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="party_logo"/>
                                 <?= $row['party_code']; ?>
