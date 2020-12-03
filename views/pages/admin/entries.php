@@ -16,29 +16,28 @@
                       <form method="post" action="<?= $app->urlFor('postentries');?>">
                          <?php 
                               if(count($pars) > 0){
-                                  foreach($pars  as $row){
+                                  foreach($pars  as $rw){
                           ?> 
                           <tr>
-                            <td><em><b>#<?= $row['ballot_position']; ?></b></em></td>
-                            <td><?= $row['name']; ?></td>
+                            <td><em><b>#<?= $rw['ballot_position']; ?></b></em></td>
+                            <td><?= $rw['name']; ?></td>
                             <td class="party_code">
-                                <img src="<?= $_SESSION['asset']?>/public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="party_logo"/>
-                                <?= $row['party_code']; ?>
-
+                                <img src="<?= $_SESSION['asset']?>/public/images/<?= strtolower($rw['party_code']); ?>_logo.png" class="party_logo"/>
+                                <?= $rw['party_code']; ?>
                             </td>
                             <td>
-                                <input type="number" name="votes_<?= $row['id']; ?>" class="vote_input" value="<?= $row['valid_votes']; ?>"/>
+                                <input type="number" name="votes_<?= $rw['id']; ?>" class="vote_input" value="<?= $rw['valid_votes']; ?>"/>
                             </td>
                           </tr>
                           <?php } ?>
                           <tr>
                             <td><b class="text-danger">** REJECTED VOTES</b></td>
                             <td>                                
-                                 <input type="number" name="rvotes_<?= $row['head_id']; ?>" class="vote_input" value="<?= $row['rejected_votes']; ?>" required/>
+                                 <input type="number" name="rvotes_<?= $pars[0]['head_id']; ?>" class="vote_input" value="<?= $pars[0]['rejected_votes']; ?>" required/>
                             </td>
                             <td><b class="text-dark font-weight-bolder">** TOTAL VOTES CAST</b></td>
                             <td>                                
-                                 <input type="number" name="tvotes_<?= $row['head_id']; ?>" class="vote_input" value="<?= $row['total_votes_cast']; ?>" required/>
+                                 <input type="number" name="tvotes_<?= $pars[0]['head_id']; ?>" class="vote_input" value="<?= $pars[0]['total_votes_cast']; ?>" required/>
                             </td>
                           </tr>
                           <?php }else{ ?>
@@ -84,11 +83,11 @@
                           <tr>
                             <td><b class="text-danger">** REJECTED VOTES</b></td>
                             <td>                                
-                                 <input type="number" name="rvotes_<?= $row['head_id']; ?>" class="vote_input" value="<?= $row['rejected_votes']; ?>" required/>
+                                 <input type="number" name="rvotes_<?= $pres[0]['head_id']; ?>" class="vote_input" value="<?= $pres[0]['rejected_votes']; ?>" required/>
                             </td>
                             <td><b class="text-dark font-weight-bolder">** TOTAL VOTES CAST</b></td>
                             <td>                                
-                                 <input type="number" name="tvotes_<?= $row['head_id']; ?>" class="vote_input" value="<?= $row['total_votes_cast']; ?>" required/>
+                                 <input type="number" name="tvotes_<?= $pres[0]['head_id']; ?>" class="vote_input" value="<?= $pres[0]['total_votes_cast']; ?>" required/>
                             </td>
                           </tr>
                           <?php }else{ ?>
