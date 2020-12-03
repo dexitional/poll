@@ -21,7 +21,7 @@
     <div class="login-cover">
         <form method="post" action="postlogin" class="login-form">
             <img class="login-logo" src="<?= $_SESSION['asset'];?>/public/images/ndc_logo.png"/>
-            <h2 class="title"><?= $_SESSION['site']['party_code'];?> LOGIN</h2>
+            <h2 class="title"><?= isset($_SESSION['site']) ? $_SESSION['site']['party_code']: '';?> LOGIN</h2>
             
             <?php if(isset($_SESSION['slim.flash']['error'])){ ?>
             <div class="error" id="error">
