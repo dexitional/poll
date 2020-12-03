@@ -74,6 +74,13 @@
                             </div>
                             <?php } ?>
 
+                            <?php if($row['id'] <= 0){ ?>
+                            <div class="form-group">
+                                <label for="password">PASSWORD</label>
+                                <input type="text" id="password" class="form-control" name="password" value="<?= $row['password']?>"/>
+                            </div>
+                            <?php } ?>
+                            
                             <div class="form-group">
                                 <label for="status">STATUS</label>
                                 <select name="status" id="status" class="form-control">

@@ -39,6 +39,14 @@
                             </a>
                         </div>
                     </div>
+                    <div class="col-md-3 col-xs-12 mt-3">
+                        <div class="card" style="background:brown">
+                            <div class="card-body text-center text-white">
+                                <h3><?= $voters; ?></h3>
+                                <b><center>REGISTERED POLLING VOTERS</center></b>
+                            </div>
+                        </div>
+                    </div>
                     <!--
                     <div class="col-md-3 col-xs-12">
                         <div class="card bg-danger">

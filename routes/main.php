@@ -45,23 +45,45 @@ $app->get('/', 'authenticate',function () use ($app) {
 })->name('index');
 
 
+$app->get('/main/:usn', 'authenticate',function ($usn) use ($app) {
+   require_once './config/db.php';
+   $s = $db->query("select s.* from sites s left join users u on s.id = u.site_id where s.id = ".$usn." or s.slug = '".$usn."'");
+   if($s->num_rows > 0){
+      $row = $s->fetch_assoc();
+      $_SESSION['site'] = $row;
+      // Redirect to Login Page
+      $app->redirect($app->urlFor('login')); 
+   }else{
+      // Redirect to Registration Page
+      $app->redirect('404');
+   }
+   
+})->name('main');
+
+
+
+
 $app->get('/dashagent',function () use ($app) {
+   require_once './config/db.php';
+   $s = $db->query("select sum(total_reg_voters) as voters  from polling_voters where station_id = ".$_SESSION['user']['station_id']." and site_id = ".$_SESSION['user']['site_id'])->fetch_assoc();
    $app->render('mainlayout.php',[
       'page' => 'pages/admin/dashagent.php',
       'slug' => 'dashagent',
       'title' => 'AGENT DASHBOARD',
       'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
-      'app' => $app
+      'app' => $app,'voters' => $s['voters']
    ]);
 })->name('dashagent');
 
 $app->get('/dashadmin',function () use ($app) {
+   require_once './config/db.php';
+   $s = $db->query("select sum(total_reg_voters) as voters from polling_voters where site_id = ".$_SESSION['user']['site_id'])->fetch_assoc();
    $app->render('mainlayout.php',[
       'page' => 'pages/admin/dashadmin.php',
       'slug' => 'dashadmin',
       'title' => 'ADMIN DASHBOARD',
       'subtitle' => 'ADANSI-ASOKWA CONSTITUENCY.',
-      'app' => $app
+      'app' => $app, 'voters' => $s['voters']
    ]);
 })->name('dashadmin');
 
@@ -171,7 +193,8 @@ $app->post('/user', 'authenticate',function () use ($app) {
       $ins = $db->query("update `users` set fname = '${r['fname']}', mname = '${r['mname']}', lname = '${r['lname']}', username = '${r['username']}', cellphone = '${r['cellphone']}', dob = '${r['dob']}', role_id = ${r['role_id']}, constituency_id = ${r['constituency_id']}, status = ${r['status']} where id = ".$r['id']);
    }else{
       if($_SESSION['user']['role_id'] == 1){ $siteid = $r['site_id'];}else{$siteid = $_SESSION['user']['site_id'];} 
-      $ins = $db->query("insert into `users`(fname,mname,lname,username,cellphone,dob,role_id,constituency_id,status,site_id) values('${r['fname']}','${r['mname']}','${r['lname']}','${r['username']}','${r['cellphone']}','${r['dob']}',${r['role_id']},${r['constituency_id']},${r['status']},${siteid})");
+      $password = md5($r['password']);
+      $ins = $db->query("insert into `users`(fname,mname,lname,username,cellphone,dob,role_id,constituency_id,status,password,site_id) values('${r['fname']}','${r['mname']}','${r['lname']}','${r['username']}','${r['cellphone']}','${r['dob']}',${r['role_id']},${r['constituency_id']},${r['status']},'${password}',${siteid})");
    }
    if($ins){
       $app->flash('success', 'User saved successfully!');

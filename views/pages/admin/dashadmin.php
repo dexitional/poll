@@ -72,16 +72,16 @@
                     <div class="col-md-3 col-xs-12 mt-3">
                         <div class="card" style="background:brown">
                             <div class="card-body text-center text-white">
-                                <h3>1020000</h3>
-                                <b><center>REGISTERED VOTERS</center></b>
+                                <h3><?= $voters?></h3>
+                                <b><center>TOTAL REGISTERED VOTERS</center></b>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-xs-12 mt-3">
+                    <div class="col-md-6 col-xs-12 mt-3">
                         <div class="card bg-dark" style="background:dark">
                             <div class="card-body text-center text-white">
-                                <h3>1020000</h3>
-                                <b><center>ELECTORS TURNOUT</center></b>
+                                <h3>DEC 6, 2020</h3>
+                                <b><center><?= $_SESSION['user']['election_name'] ?></center></b>
                             </div>
                         </div>
                     </div>

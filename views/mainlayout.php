@@ -2,8 +2,6 @@
 <?php if(!isset($_SESSION)) session_start(); ?>
 <?php require_once('commons/header.php') ?>
 <?php require_once('commons/navleft.php') ?>
-      
- 
   <div class="app-main__outer">
   <div class="app-main__inner">
       <!-- PAGE TITLE -->
@@ -14,8 +12,5 @@
               </div>    
           </div>
       </div>            
-     
       <?php require_once($page) ?> 
-
-
 <?php require_once('commons/footer.php') ?>

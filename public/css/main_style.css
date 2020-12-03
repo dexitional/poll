@@ -73,7 +73,6 @@ h1.main-title{
 
 .login-form {
     width: 380px;
-    height: 400px;
     background: transparent;
     box-shadow: 0px 0px 10px #333;
     border-radius: 40px 0 40px 0;
@@ -244,6 +243,18 @@ h2.result-title{
   background:#fff;
   color:brown;
   border-radius:0 5px 5px 0;
+}
+
+
+.error{
+  border: 3px solid pink;
+  background: rgb(221, 142, 142);
+  color:brown;
+  font-weight:bolder;
+  text-align:center;
+  padding: 5px 10px;
+  font-size: 11px;
+  margin: 5px 10px 10px;
 }
 
 
