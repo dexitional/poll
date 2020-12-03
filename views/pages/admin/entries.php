@@ -71,7 +71,7 @@
                               <?= $row['name']; ?>
                             </td>
                             <td class="party_code">
-                                <img src="<?= $_SESSION['asset']?>/public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="can_photo"/>
+                                <img src="<?= $_SESSION['asset']?>/public/images/<?= strtolower($row['party_code']); ?>_logo.png" class="can_photo" style="height:30px;"/>
                                 <?= $row['party_code']; ?>
                             </td>
                             <td>
